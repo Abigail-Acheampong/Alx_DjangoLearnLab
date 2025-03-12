@@ -6,11 +6,10 @@ class Author(models.Model):
 
     Fields:
     - name (CharField): Stores the author's name.
-    
+
     Relationships:
     - One-to-Many: One author can have multiple books.
     """
-
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -35,3 +34,4 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+

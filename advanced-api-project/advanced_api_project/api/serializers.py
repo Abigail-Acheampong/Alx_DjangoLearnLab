@@ -13,7 +13,6 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = '__all__'
 
-        #custom validation to ensure publication_year is not in the future
     def validate_publication_year(self, value):
         """
         Custom validation to ensure the publication_year is not greater than the current year.
@@ -21,7 +20,7 @@ class BookSerializer(serializers.ModelSerializer):
         """
         current_year = date.today().year
         if value > current_year:
-            raise serializers.ValidationError("Publication year cannot be in the future")
+            raise serializers.ValidationError("Publication year cannot be in the future.")
         return value
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -36,7 +35,7 @@ class AuthorSerializer(serializers.ModelSerializer):
     - Uses `BookSerializer` with `many=True` to serialize all books written by the author.
     - The `books` field is set to `read_only=True` to prevent book creation through this serializer.
     """
-    books = BookSerializer(many=True, read_only=True) # Nested serializer for related books
+    books = BookSerializer(many=True, read_only=True)
 
     class Meta:
         model = Author
