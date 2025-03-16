@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import render
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -32,6 +33,19 @@ class BookDeleteView(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]  # Only authenticated users can delete books.
 
 class BookListView(generics.ListAPIView):
+     """
+    API view to retrieve a list of books or create a new book.
+
+    Features:
+    - **Filtering**: Filter books by title, author, and publication year.
+    - **Searching**: Search for books by title and author.
+    - **Ordering**: Sort books by title or publication year.
+
+    Example Queries:
+    - `GET /books/?author=John Doe`
+    - `GET /books/?search=Python`
+    - `GET /books/?ordering=-publication_year`
+    """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
