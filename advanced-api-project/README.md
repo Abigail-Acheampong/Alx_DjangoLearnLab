@@ -11,3 +11,19 @@ Users can filter books using:
 **Example:**
 ```sh
 GET /books/?author=John Doe
+
+
+# API Testing Guide
+
+## Running Tests
+To run unit tests for the API, use the following command:
+
+```sh
+python manage.py test api
+# API Testing Guide
+
+## Running Tests
+To run unit tests for the API, use the following command:
+
+```sh
+python manage.py test api
