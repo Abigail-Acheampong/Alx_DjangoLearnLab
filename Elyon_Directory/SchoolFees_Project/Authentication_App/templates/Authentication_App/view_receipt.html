@@ -1,0 +1,32 @@
+{% extends 'Authentication_App/base.html' %}
+
+{% block title %}Home - School Fees Receipt Management{% endblock %}
+
+{% block navbar %}
+<nav class="navbar">
+ <div class="nav-left">
+  <a href="{% url 'make_payment' %}">Add New Student</a>
+  <a href="{% url 'make_payment' %}">Make Payment</a>
+  <a href="{% url 'view_receipt' %}">View Receipts</a>
+  <a href="{% url 'student_info' %}">View Student Info</a>
+ </div>
+ <div class="nav-right">
+  <input type="text" placeholder="Search..">
+  <button>Search</button>
+  {% if user.is_authenticated %}
+  <form action="{% url 'logout' %}" method="post" style="display: inline;">
+   {% csrf_token %}
+   <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">
+    Logout
+   </button>
+  </form>
+  {% else %}
+  <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+ </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<p>Recipt will be posted here</p>
+{% endblock %}

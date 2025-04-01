@@ -1,0 +1,58 @@
+{% extends 'Authentication_App/base.html' %}
+
+{% block title %}Home - School Fees Receipt Management{% endblock %}
+
+{% block navbar %}
+<nav class="navbar">
+ <div class="nav-left">
+  <a href="{% url 'register_student' %}">Register Student</a>
+  <a href="{% url 'make_payment' %}">Make Payment</a> 
+  <a href="{% url 'view_receipt' %}">View Receipts</a> 
+  <a href="{% url 'student_list' %}">View Student Info</a>
+ </div>
+ <div class="nav-right">
+  <input type="text" placeholder="Search..">
+  <button>Search</button>
+  {% if user.is_authenticated %}
+  <form action="{% url 'logout' %}" method="post" style="display: inline;">
+   {% csrf_token %}
+   <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">
+    Logout
+   </button>
+  </form>
+  {% else %}
+  <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+ </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>Welcome to the School Fees Receipt Management System</h1>
+<p>This is the home page. Here, you can manage student payments, view receipts, and access important school financial
+ data.</p>
+
+<!-- Recent Transactions Section -->
+<h2>Recent Transactions</h2>
+{% if recent_transactions %}
+<table border="1" cellpadding="10">
+ <tr>
+  <th>Student Name</th>
+  <th>Amount Paid</th>
+  <th>Payment Date</th>
+  <th>Receipt</th>
+ </tr>
+ {% for transaction in recent_transactions %}
+ <tr>
+  <td>{{ transaction.student.name }}</td>
+  <td>{{ transaction.amount_paid }}</td>
+  <td>{{ transaction.payment_date }}</td>
+  <td><a href="{% url 'view_receipt' %}?id={{ transaction.id }}">View Receipt</a></td>
+ </tr>
+ {% endfor %}
+</table>
+{% else %}
+<p>No recent transactions available.</p>
+{% endif %}
+
+{% endblock %}

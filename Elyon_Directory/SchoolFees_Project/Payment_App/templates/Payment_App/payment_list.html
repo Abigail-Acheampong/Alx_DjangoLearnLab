@@ -1,0 +1,27 @@
+{% extends 'Authentication_App/base.html' %}
+
+{% block content %}
+<h2>Payment Records</h2>
+
+<table border="1">
+ <tr>
+  <th>Receipt Number</th>
+  <th>Student</th>
+  <th>Amount Paid</th>
+  <th>Payment Method</th>
+  <th>Transaction Reference</th>
+  <th>Date</th>
+ </tr>
+ {% for payment in payments %}
+ <tr>
+  <td>{{ payment.receipt_number }}</td>
+  <td>{{ payment.student.name }}</td>
+  <td>{{ payment.amount_paid }}</td>
+  <td>{{ payment.payment_method }}</td>
+  <td>{{ payment.transaction_reference }}</td>
+  <td>{{ payment.created_at }}</td>
+ </tr>
+ {% endfor %}
+</table>
+
+{% endblock %}

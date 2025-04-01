@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'StudentInformation_App',  # Add this line to include the app in the project
+    'StudentInformation_App',  
+    'Authentication_App',
+    'Payment_App',  
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'SchoolFees_Project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,7 +121,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'static')  # Optional, for global static files
 ]
 
 # Default primary key field type
@@ -127,9 +129,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Authentication Redirect Settings
+LOGIN_URL = "login"  # Redirect users to login page if they try to access protected pages
+LOGIN_REDIRECT_URL = "home"  # Redirect to home after login
+LOGOUT_REDIRECT_URL = "about"  # Redirect to about after logout
 
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 

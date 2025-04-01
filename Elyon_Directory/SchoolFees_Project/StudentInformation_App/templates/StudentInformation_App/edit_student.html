@@ -1,0 +1,143 @@
+{% extends 'Authentication_App/base.html' %}
+
+{% block navbar %}
+<nav class="navbar">
+ <div class="nav-left">
+  <a href="{% url 'register_student' %}">Register Student</a>
+  <a href="{% url 'make_payment' %}">Make Payment</a>
+  <a href="{% url 'payment_list' %}">View Payments</a>
+  <a href="{% url 'student_list' %}">View Student Info</a>
+ </div>
+ <div class="nav-right">
+  <input type="text" placeholder="Search..">
+  <button>Search</button>
+  {% if user.is_authenticated %}
+  <form action="{% url 'logout' %}" method="post" style="display: inline;">
+   {% csrf_token %}
+   <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">
+    Logout
+   </button>
+  </form>
+  {% else %}
+  <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+ </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+ <h2>Edit Student Details</h2>
+
+ {% if messages %}
+ <ul class="messages">
+  {% for message in messages %}
+  <li class="{{ message.tags }}">{{ message }}</li>
+  {% endfor %}
+ </ul>
+ {% endif %}
+
+ <form method="POST">
+  {% csrf_token %}
+  <table>
+   <tr>
+    <td><label for="name">Student Name:</label></td>
+    <td><input type="text" id="name" name="name" value="{{ student.name }}" required></td>
+   </tr>
+   <tr>
+    <td><label for="guardian_name">Guardian Name:</label></td>
+    <td><input type="text" id="guardian_name" name="guardian_name" value="{{ student.guardian_name }}" required></td>
+   </tr>
+   <tr>
+    <td><label for="guardian_contact">Guardian Contact:</label></td>
+    <td><input type="text" id="guardian_contact" name="guardian_contact" value="{{ student.guardian_contact }}"
+      required></td>
+   </tr>
+   <tr>
+    <td colspan="2" style="text-align: center;">
+     <button type="submit">Save Changes</button>
+     <a href="{% url 'student_list' %}" class="cancel-button">Cancel</a>
+    </td>
+   </tr>
+  </table>
+ </form>
+</div>
+
+<style>
+ .form-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  border: 3px solid #333;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+ }
+
+ h2 {
+  text-align: center;
+ }
+
+ table {
+  width: 100%;
+ }
+
+ table td {
+  padding: 10px;
+ }
+
+ input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+ }
+
+ button {
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+ }
+
+ button:hover {
+  background-color: #0056b3;
+ }
+
+ .cancel-button {
+  padding: 10px 15px;
+  background-color: #155724;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 10px;
+ }
+
+ .cancel-button:hover {
+  background-color: #c82333;
+ }
+
+ .messages {
+  list-style: none;
+  padding: 10px;
+  text-align: center;
+ }
+
+ .messages li {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin: 10px auto;
+  width: 50%;
+  border-left: 5px solid #28a745;
+  font-weight: bold;
+  border-radius: 5px;
+ }
+</style>
+{% endblock %}

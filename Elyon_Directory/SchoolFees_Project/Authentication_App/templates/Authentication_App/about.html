@@ -1,0 +1,25 @@
+{% extends "Authentication_App/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="centered-item">
+ <span class="bold">EL-ELYON LEARNING CENTRE</span>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+ <div class="centered-item">
+  <img src="{% static 'Authentication_App/images/elyon_badge-removebg-preview.png' %}" alt="Badge">
+ </div>
+</div>
+
+<!-- Download Section -->
+<div class="download-section">
+ <button class="download-btn">Download <br> <span>Click to download the database</span></button>
+ <div class="download-options">
+  <div class="option">👨‍🎓 for <strong>All Students</strong> <br> until present date</div>
+  <div class="option">👨‍🎓💰 for <strong>All Debtors</strong> <br> until present date</div>
+  <div class="option">💵 for <strong>Total Outstanding Fees</strong> <br> until present date</div>
+ </div>
+</div>
+{% endblock %}
